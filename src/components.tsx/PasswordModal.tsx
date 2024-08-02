@@ -49,7 +49,6 @@ export default function PasswordModal({}: Props) {
     if(includeLowercase) characters+=lowerCase;
 
     let genPass=''
-    let newPass=''
     let passwordScore=''
 const generatePassword=()=>{
     console.log("click")
