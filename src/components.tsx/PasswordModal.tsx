@@ -22,7 +22,7 @@ export default function PasswordModal({}: Props) {
     const [includeLowercase, setIncludeLowercase] = useState(false);
     const [includeNumbers, setIncludeNumbers] = useState(true);
     const [includeSymbols, setIncludeSymbols] = useState(false);
-    const [strength,setStrength] =useState<'weak' | 'medium' | 'strong' | "">('');
+    // const [strength,setStrength] =useState<'weak' | 'medium' | 'strong' | "">('');
 
 
     const [generatedPassword, setGeneratedPassword]=useState<string>(generatePassword({length,includeLowercase,includeUppercase,includeNumbers,includeSymbols}))
@@ -45,25 +45,24 @@ export default function PasswordModal({}: Props) {
 
 
 
-    let genPass=''
-    let passwordScore=''
 
-function calculateStrength(password:string) {
-    let score = 0;
-    if (password.length >= 8) score++;
-    if (password.length >= 12) score++;
-    if (/\d/.test(password)) score++;
-    if (/[a-z]/.test(password)) score++;
-    if (/[A-Z]/.test(password)) score++;
-    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score++;
-    if (score <= 2) {
-      return "weak";
-    } else if (score <= 4) {
-      return "medium";
-    } else {
-      return "strong";
-    }
-  }
+
+// function calculateStrength(password:string) {
+//     let score = 0;
+//     if (password.length >= 8) score++;
+//     if (password.length >= 12) score++;
+//     if (/\d/.test(password)) score++;
+//     if (/[a-z]/.test(password)) score++;
+//     if (/[A-Z]/.test(password)) score++;
+//     if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score++;
+//     if (score <= 2) {
+//       return "weak";
+//     } else if (score <= 4) {
+//       return "medium";
+//     } else {
+//       return "strong";
+//     }
+//   }
   
   return (
       <div className="text-white w-96">
@@ -76,7 +75,7 @@ function calculateStrength(password:string) {
         includeSymbols={includeSymbols} 
         handleConstraints={handleConstraints}
         >
-        <PasswordScore score={strength}/>
+        <PasswordScore score={"medium"}/>
         </InputControll>
 
         <button 
