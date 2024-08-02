@@ -2,6 +2,7 @@ import {  useState } from "react"
 import GeneratedPass from "./GeneratedPass"
 import InputControll from "./InputControll"
 import PasswordScore from "./PasswordScore"
+import generatePassword from "./hello"
 
 type Props = {}
 
@@ -16,13 +17,17 @@ export default function PasswordModal({}: Props) {
     // })
     
     const [length,setLength]=useState<number>(10)
-    const [generatedPassword, setGeneratedPassword]=useState<string>("")
+    
     const [includeUppercase, setIncludeUppercase] = useState(true);
     const [includeLowercase, setIncludeLowercase] = useState(false);
     const [includeNumbers, setIncludeNumbers] = useState(true);
     const [includeSymbols, setIncludeSymbols] = useState(false);
     const [strength,setStrength] =useState<'weak' | 'medium' | 'strong' | "">('');
-    const handleConstraints=(type:any)=>{
+
+
+    const [generatedPassword, setGeneratedPassword]=useState<string>(generatePassword({length,includeLowercase,includeUppercase,includeNumbers,includeSymbols}))
+
+    const handleConstraints=(type:string| number)=>{
         if(type==="upper"){
             setIncludeUppercase(!includeUppercase)
         }else if(type==="number"){
@@ -31,41 +36,18 @@ export default function PasswordModal({}: Props) {
             setIncludeSymbols(!includeSymbols)
         }else if(type==="lower"){
             setIncludeLowercase(!includeLowercase)
-        }else{
+        }else if(typeof type =="number"){
             setLength(type)
+        }else {
+            return
         }
     }
 
-    const alphabet = '';
-    const lowerCase="abcdefghijklmnopqrstuvwxyz"
-    const upperCase='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
-    let characters = alphabet;
-    
-    if (includeNumbers) characters += numbers;
-    if (includeSymbols) characters += symbols;
-    if(includeUppercase) characters+=upperCase;
-    if(includeLowercase) characters+=lowerCase;
+
 
     let genPass=''
     let passwordScore=''
-const generatePassword=()=>{
-    console.log("click")
-    if(!includeLowercase && !includeUppercase && !includeNumbers && !includeSymbols){
-        console.log("no")
-        return
-    }
-  
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        genPass += characters[randomIndex];
-      }
-      setGeneratedPassword(genPass)
-      setStrength(calculateStrength(genPass))
-      genPass=''
-      
-}
+
 function calculateStrength(password:string) {
     let score = 0;
     if (password.length >= 8) score++;
@@ -83,7 +65,6 @@ function calculateStrength(password:string) {
     }
   }
   
-  console.log(passwordScore,"scoress")
   return (
       <div className="text-white w-96">
         <GeneratedPass pass={generatedPassword}/>
@@ -100,7 +81,7 @@ function calculateStrength(password:string) {
 
         <button 
         className="w-full bg-green-300 py-2 font-mono text-blackcursor-pointer"
-        onClick={generatePassword}>
+        onClick={()=>setGeneratedPassword(generatePassword({includeLowercase, includeNumbers, includeSymbols, includeUppercase, length}))}>
             <p>GENERATE </p>
         </button>
     </div>
