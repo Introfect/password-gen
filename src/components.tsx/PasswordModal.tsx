@@ -21,7 +21,7 @@ export default function PasswordModal({}: Props) {
     const [includeLowercase, setIncludeLowercase] = useState(false);
     const [includeNumbers, setIncludeNumbers] = useState(true);
     const [includeSymbols, setIncludeSymbols] = useState(false);
-    const [strength,setStrength] =useState<'weak' | 'medium' | 'strong'>('medium');
+    const [strength,setStrength] =useState<'weak' | 'medium' | 'strong' | "">('');
     const handleConstraints=(type:any)=>{
         if(type==="upper"){
             setIncludeUppercase(!includeUppercase)

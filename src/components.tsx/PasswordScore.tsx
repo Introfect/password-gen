@@ -2,7 +2,7 @@
 type Props = {
     score:Strength
 }
-type Strength = 'weak' | 'medium' | 'strong';
+type Strength = 'weak' | 'medium' | 'strong' |"";
 function PasswordScore({score}: Props) {
   const getStrengthColor = (): string => {
     switch (score) {
@@ -17,7 +17,8 @@ function PasswordScore({score}: Props) {
   const filledBars: Record<Strength, number> = {
     weak: 1,
     medium: 3,
-    strong: 4
+    strong: 4,
+    "":0
   };
 
 
