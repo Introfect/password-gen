@@ -2,7 +2,7 @@
 type Props = {
     score:Strength
 }
-type Strength = 'weak' | 'medium' | 'strong' |"";
+export type Strength = 'weak' | 'medium' | 'strong' |"";
 function PasswordScore({score}: Props) {
   const getStrengthColor = (): string => {
     switch (score) {
@@ -12,16 +12,12 @@ function PasswordScore({score}: Props) {
       default: return 'bg-gray-300';
     }
   };
-
-
   const filledBars: Record<Strength, number> = {
     weak: 1,
     medium: 3,
     strong: 4,
     "":0
   };
-
-
   return (
     <div className="flex items-center justify-between bg-gray-800 p-2 rounded">
       <span className="text-gray-400 uppercase text-sm">Strength</span>

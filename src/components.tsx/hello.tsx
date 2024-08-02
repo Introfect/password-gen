@@ -19,10 +19,7 @@ export default function generatePassword({includeLowercase, includeNumbers, incl
         const randomIndex = Math.floor(Math.random() * characters.length);
         genPass += characters[randomIndex];
       }
-    //   setGeneratedPassword(genPass)
-    //   setStrength(calculateStrength(genPass))
-    let newPass=genPass
-      return newPass
-      
+      return genPass
+    
       
 }
