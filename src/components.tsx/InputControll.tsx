@@ -1,23 +1,20 @@
 import { ReactNode } from "react"
+import { A } from "./PasswordModal"
 
 type Props = {
-    length:number,
-    includeUppercase:boolean,
-    includeLowercase:boolean,
-    includeNumbers:boolean,
-    includeSymbols:boolean,
-    handleConstraints:Function,
+    dispatch: any
+    passwordConstraints:A
     children:ReactNode
 
 }
 
-function InputControll({length,includeUppercase,includeLowercase,includeNumbers,includeSymbols,handleConstraints,children}: Props) {;
+function InputControll({dispatch,passwordConstraints,children}: Props) {
   return (
     <div className="text-md px-4 font-mono w-full mb-4 bg-gray-700 p-2 rounded">
    <div className="mb-4">
     <div className="flex justify-between">
     <label className="block mb-2">Character Length</label>
-    <span className="text-green-300 font-bold text-xl items-center">{length}</span>
+    <span className="text-green-300 font-bold text-xl items-center">{passwordConstraints.length}</span>
 
     </div>
     
@@ -26,8 +23,14 @@ function InputControll({length,includeUppercase,includeLowercase,includeNumbers,
       type="range" 
       min="1" 
       max="20" 
-      value={length}
-      onChange={(e) => handleConstraints(Number(e.target.value))}
+      value={passwordConstraints.length}
+      onChange={(e) =>
+        dispatch({
+          type:"changeLength",
+          value:e.target.value
+      }) 
+
+      }
       className="w-full"
     />
     
@@ -37,8 +40,10 @@ function InputControll({length,includeUppercase,includeLowercase,includeNumbers,
     <label className="flex items-center">
       <input 
         type="checkbox" 
-        checked={includeUppercase} 
-        onChange={() => handleConstraints("upper")}
+        checked={passwordConstraints.includeUpperCase} 
+        onChange={() => dispatch({
+          type:"includeUpperCase"
+      })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
       Include Uppercase Letters
@@ -46,8 +51,10 @@ function InputControll({length,includeUppercase,includeLowercase,includeNumbers,
     <label className="flex items-center">
       <input 
         type="checkbox" 
-        checked={includeLowercase} 
-        onChange={() => handleConstraints("lower")}
+        checked={passwordConstraints.includeLowerCase} 
+        onChange={() => dispatch({
+          type:"includeLowerCase"
+      })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
       Include Lowercase Letters
@@ -55,8 +62,10 @@ function InputControll({length,includeUppercase,includeLowercase,includeNumbers,
     <label className="flex items-center">
       <input 
         type="checkbox" 
-        checked={includeNumbers} 
-        onChange={() => handleConstraints("number")}
+        checked={passwordConstraints.includeNumbers} 
+        onChange={() => dispatch({
+          type:"includeNumbers"
+      })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
       Include Numbers
@@ -64,8 +73,10 @@ function InputControll({length,includeUppercase,includeLowercase,includeNumbers,
     <label className="flex items-center">
       <input 
         type="checkbox" 
-        checked={includeSymbols} 
-        onChange={() => handleConstraints("symbols")}
+        checked={passwordConstraints.includeSymbols} 
+        onChange={() => dispatch({
+          type:"includeSymbols"
+      })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
       Include Symbols
