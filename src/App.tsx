@@ -1,4 +1,4 @@
-import PasswordModal from "./components.tsx/PasswordModal"
+import PasswordModal from "./components/PasswordModal"
 
 
 function App() {
