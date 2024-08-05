@@ -1,8 +1,8 @@
-import { ReactNode } from "react"
+import { Dispatch, ReactNode } from "react"
 import { A } from "./PasswordModal"
 
 type Props = {
-    dispatch: any
+    dispatch: Dispatch<{type: string; value: number}>
     passwordConstraints:A
     children:ReactNode
 
@@ -27,7 +27,7 @@ function InputControll({dispatch,passwordConstraints,children}: Props) {
       onChange={(e) =>
         dispatch({
           type:"changeLength",
-          value:e.target.value
+          value:Number(e.target.value)
       }) 
 
       }
@@ -42,7 +42,8 @@ function InputControll({dispatch,passwordConstraints,children}: Props) {
         type="checkbox" 
         checked={passwordConstraints.includeUpperCase} 
         onChange={() => dispatch({
-          type:"includeUpperCase"
+          type:"includeUpperCase",
+          value:0
       })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
@@ -53,7 +54,8 @@ function InputControll({dispatch,passwordConstraints,children}: Props) {
         type="checkbox" 
         checked={passwordConstraints.includeLowerCase} 
         onChange={() => dispatch({
-          type:"includeLowerCase"
+          type:"includeLowerCase",
+          value:0
       })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
@@ -64,7 +66,8 @@ function InputControll({dispatch,passwordConstraints,children}: Props) {
         type="checkbox" 
         checked={passwordConstraints.includeNumbers} 
         onChange={() => dispatch({
-          type:"includeNumbers"
+          type:"includeNumbers",
+          value:0
       })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
@@ -75,7 +78,8 @@ function InputControll({dispatch,passwordConstraints,children}: Props) {
         type="checkbox" 
         checked={passwordConstraints.includeSymbols} 
         onChange={() => dispatch({
-          type:"includeSymbols"
+          type:"includeSymbols",
+          value:0
       })}
         className="w-4 h-4 mr-2 accent-green-300"
       />
