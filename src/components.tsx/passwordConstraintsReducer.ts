@@ -1,6 +1,6 @@
-import { A } from "./PasswordModal";
+import { passwordConstraintsType } from "./PasswordModal";
 
-export default function passwordConstraintsReducer(constraints: A, action: { type: string; value:number}): A{
+export default function passwordConstraintsReducer(constraints: passwordConstraintsType, action: { type: string; value:number}): passwordConstraintsType{
     switch(action.type){
         case 'includeUpperCase':{
             return{
@@ -29,7 +29,7 @@ export default function passwordConstraintsReducer(constraints: A, action: { typ
         case 'changeLength':{
             return{
                 ...constraints,
-                length:action.value
+                passwordLength:action.value
 
             }
         }
